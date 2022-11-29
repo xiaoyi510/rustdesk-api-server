@@ -1,0 +1,9 @@
+mysql:
+  host: '127.0.0.1'
+  port: 3306
+  database: 'rustdesk'
+  username: 'root'
+  password: ''
+app:
+  authkey: 123456
+  cryptkey: NanEVhjEwuPSemoJkwcYEcjDJRVWcZfb9bIIZcBeswhPP
