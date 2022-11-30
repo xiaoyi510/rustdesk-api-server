@@ -3,7 +3,7 @@ package controllers
 import (
 	"rustdesk-api-server/app/dto"
 	"rustdesk-api-server/app/services"
-	"rustdesk-api-server/configer"
+	"rustdesk-api-server/global"
 	"rustdesk-api-server/utils/beegoHelper"
 )
 
@@ -37,7 +37,7 @@ func (ctl *UserController) Reg() {
 	}
 
 	// 判断注册密钥是否合法
-	if req.AuthKey != configer.ConfigVar.App.AuthKey {
+	if req.AuthKey != global.ConfigVar.App.AuthKey {
 		ctl.JSON(beegoHelper.H{
 			"error": "授权码错误",
 		})
@@ -74,7 +74,7 @@ func (ctl *UserController) SetPwd() {
 	}
 
 	// 判断注册密钥是否合法
-	if req.AuthKey != configer.ConfigVar.App.AuthKey {
+	if req.AuthKey != global.ConfigVar.App.AuthKey {
 		ctl.JSON(beegoHelper.H{
 			"error": "授权码错误",
 		})

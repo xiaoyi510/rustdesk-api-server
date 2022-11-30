@@ -5,7 +5,7 @@ import (
 	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/core/logs"
 	_ "github.com/go-sql-driver/mysql"
-	"rustdesk-api-server/configer"
+	"rustdesk-api-server/global"
 )
 
 // 注册Mysql驱动
@@ -18,11 +18,11 @@ func init() {
 
 	// 格式化连接符
 	connStr := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
-		configer.ConfigVar.Mysql.Username,
-		configer.ConfigVar.Mysql.Password,
-		configer.ConfigVar.Mysql.Host,
-		configer.ConfigVar.Mysql.Port,
-		configer.ConfigVar.Mysql.Database,
+		global.ConfigVar.Mysql.Username,
+		global.ConfigVar.Mysql.Password,
+		global.ConfigVar.Mysql.Host,
+		global.ConfigVar.Mysql.Port,
+		global.ConfigVar.Mysql.Database,
 	)
 
 	// 注册链接数据库

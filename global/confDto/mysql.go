@@ -1,4 +1,4 @@
-package config
+package confDto
 
 type Mysql struct {
 	Host     string `mapstructure:"host" json:"host" yaml:"host"`

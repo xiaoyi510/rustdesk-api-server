@@ -3,7 +3,7 @@ package services
 import (
 	"github.com/beego/beego/v2/client/orm"
 	"rustdesk-api-server/app/models"
-	"rustdesk-api-server/configer"
+	"rustdesk-api-server/global"
 	"rustdesk-api-server/utils/gmd5"
 	"time"
 )
@@ -36,7 +36,7 @@ func (u *UserService) Reg(username, password string) bool {
 // 生成保存的密码
 func (u *UserService) GenPwd(password string) string {
 	// 校验密码是否正确
-	pwd, err := gmd5.Encrypt(password + configer.ConfigVar.App.CryptKey)
+	pwd, err := gmd5.Encrypt(password + global.ConfigVar.App.CryptKey)
 	if err != nil {
 		panic("md5 encrypt Err" + err.Error())
 	}

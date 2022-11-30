@@ -1,3 +1,3 @@
-package configer
+package global
 
 var ConfigVar Config

@@ -1,4 +1,4 @@
-package config
+package confDto
 
 type AppConfig struct {
 	AuthKey  string
