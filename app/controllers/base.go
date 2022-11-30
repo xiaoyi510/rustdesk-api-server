@@ -26,7 +26,7 @@ func (ctl *BaseController) Prepare() {
 	log.Println("请求接口", ctl.controllerName, ctl.actionName)
 	// 获取token
 	token := ctl.Ctx.Input.Header("Authorization")
-	if ctl.controllerName != "login" && !(ctl.controllerName == "user" && (ctl.actionName == "reg" || ctl.actionName == "setpwd")) {
+	if ctl.controllerName != "login" && ctl.controllerName != "index" && !(ctl.controllerName == "user" && (ctl.actionName == "reg" || ctl.actionName == "setpwd")) {
 		if token == "" {
 			ctl.JSON(beegoHelper.H{
 				"error": "用户授权验证失败",
