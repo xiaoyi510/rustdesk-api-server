@@ -3,6 +3,8 @@ RustDesk Api 服务器端 Go语言版本
 
 登录后可返回同账号下所有在用主机 以本号归属开头
 
+[![Build Release](https://github.com/xiaoyi510/rustdesk-api-server/actions/workflows/build.yml/badge.svg)](https://github.com/xiaoyi510/rustdesk-api-server/actions/workflows/build.yml)
+
 ## 使用方法
 
 
