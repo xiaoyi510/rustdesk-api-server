@@ -19,13 +19,31 @@ func init() {
 		config = configEnv
 	}
 
+	// 判断是否有配置文件
+	_, err := os.Stat(config)
+	if err != nil && os.IsNotExist(err) {
+		// 配置文件不存在
+		err := os.WriteFile(config, []byte(`mysql:
+  host: '127.0.0.1'
+  port: 3306
+  database: 'rustdesk'
+  username: 'root'
+  password: ''
+app:
+  authkey: 123456
+  cryptkey: NanEVhjEwuPSemoJkwcYEcjDJRVWcZfb9bIIZcBeswhPP`), 0777)
+		if err != nil {
+			panic(err)
+		}
+	}
+
 	v := viper.New()
 
 	// 设置配置文件
 	v.SetConfigFile(config)
 
 	// 读取配置
-	err := v.ReadInConfig()
+	err = v.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("加载配置文件失败: %s", err))
 	}
