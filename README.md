@@ -7,21 +7,29 @@ RustDesk Api 服务器端 Go语言版本
 
 ### 导入mysql数据库表
 导入数据库 > db.sql
-即可
 
-### 编译
-   
+### 修改数据库连接
+修改 conf/config.yml 中的配置项
+```yaml
+mysql:
+  host: '127.0.0.1'
+  port: 3306 
+  database: 'rustdesk' # 数据库名
+  username: 'root' # 数据库用户名
+  password: '' # 数据库密码
+app:
+  authkey: 123456 # 授权密码 添加账号或者修改密码使用
+  cryptkey: 123123123123  # 密码加密盐值 建议首次修改后面别改 = =
 ```
-linux: 
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build .
 
-windows: 
-CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build .
-```
+### 搭建跑起来
 
-编译后请把conf目录中的`config_default.yml`修改为`config.yml`并修改其中的mysql数据库连接
+1. 运行程序
 
-### 搭建 
+2. 端口映射(推荐):
+> 直接将21114端口号映射出来 貌似rustdesk默认端口是21114 至少手机端我是~~
+
+
 nginx服务器:
 > 进行反向代理 反向代理可使用80端口什么的
 ```nginx
@@ -60,9 +68,6 @@ location ^~ /
 #PROXY-END/
 ```
 
-端口映射(推荐):
-> 直接将21114映射出来 貌似rustdesk默认端口是21114 至少手机端我是~~
-
 ### RustDesk配置
 ID服务器和中继服务器可自行寻找Docker进行安装
 
@@ -72,17 +77,6 @@ ID服务器和中继服务器可自行寻找Docker进行安装
 安卓端不需要填写 `http://` 前缀 且必须为 `21114` 端口
 
 
-### 配置说明
-```
-mysql:
-  host: '127.0.0.1' // mysql 主机
-  port: 3306 // mysql 端口号
-  database: 'rustdesk' // mysql 数据库
-  username: 'root' // mysql 用户名
-  password: '' // mysql 密码
-auth_key: 123456 // 用户管理授权密钥
-crypt_key: NanEVhjEwuPSemoJkwcYEcjDJRVWcZfb9bIIZcBeswhPP // 加密密码的掩码
-```
 
 ### 创建账号
 请求
