@@ -19,6 +19,7 @@ func main() {
 	// 设置请求内容为复制体
 	web.BConfig.CopyRequestBody = true
 	orm.Debug = true
+	orm.RunSyncdb("default", false, true)
 	err := config.InitGlobalInstance("ini", "conf/app.conf")
 	if err != nil {
 		panic(err)

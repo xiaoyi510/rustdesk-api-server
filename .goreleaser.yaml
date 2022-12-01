@@ -22,6 +22,5 @@ archives:
     files:
       - README.md
       - img.png
-      - db.sql
       - dist/*
       - conf/app.conf
