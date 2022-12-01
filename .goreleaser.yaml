@@ -23,5 +23,4 @@ archives:
     files:
       - README.md
       - img.png
-      - dist/*
       - conf/app.conf
