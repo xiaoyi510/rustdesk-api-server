@@ -1,10 +1,25 @@
 project_name: rustdesk-api-server
 builds:
-  - env: [CGO_ENABLED=0]
+  - env: [ CGO_ENABLED=0 ]
+    flags:
+      - -v
     goos:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - arm
+      - arm64
+      - '386'
+    goarm:
+      - '6'
+      - '7'
+    ignore:
+      - goos: darwin
+        goarch: '386'
+      - goos: darwin
+        goarch: 'arm'
 checksum:
   name_template: 'checksums.txt'
 archives:
