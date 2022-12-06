@@ -1,0 +1,41 @@
+FROM --platform=$TARGETPLATFORM  alpine:latest
+MAINTAINER Baozi<admin@52nyg.com>
+# 使用变量必须申明
+ARG TARGETOS
+ARG TARGETARCH
+ARG TARGETVARIANT
+
+# 时区
+ENV TZ=Asia/Shanghai
+
+
+#5.更新Alpine的软件源为阿里云，因为从默认官源拉取实在太慢了
+RUN echo http://mirrors.aliyun.com/alpine/v3.15/main/ > /etc/apk/repositories && \
+    echo http://mirrors.aliyun.com/alpine/v3.15/community/ >> /etc/apk/repositories && \
+    apk update && apk upgrade && apk add  wget bash && \
+    apk add --update tzdata && cp /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo "$TZ" > /etc/timezone \
+    && rm -rf /var/cache/apk/*
+
+###############################################################################
+#                                INSTALLATION
+###############################################################################
+# 定义APP运行目录
+ENV WORKDIR  /app
+
+
+# 导入文件
+ADD ./dist/rustdesk-api-server_${TARGETOS}_${TARGETARCH}/rustdesk-api-server $WORKDIR/rustdesk-api-server
+
+# 复制配置文件
+COPY conf/app.conf /app/conf/app.conf
+
+
+###############################################################################
+#                                   START
+###############################################################################
+WORKDIR /app
+ENTRYPOINT ["./rustdesk-api-server"]
+
+# 导出端口号
+EXPOSE 21114
