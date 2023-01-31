@@ -23,7 +23,8 @@ func init() {
 	_, err := os.Stat(config)
 	if err != nil && os.IsNotExist(err) {
 		// 配置文件不存在
-		err := os.WriteFile(config, []byte(`mysql:
+		err := os.WriteFile(config, []byte(`dbtype: 'sqlite3'
+mysql:
   host: '127.0.0.1'
   port: 3306
   database: 'rustdesk'
