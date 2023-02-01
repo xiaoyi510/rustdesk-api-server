@@ -7,6 +7,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/mattn/go-sqlite3 v1.14.7
 	github.com/spf13/viper v1.14.0
 )
 

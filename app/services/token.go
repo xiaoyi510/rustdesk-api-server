@@ -25,12 +25,29 @@ func (t *TokenService) Login(user *models.User, clientId, uuid, token2 string) b
 		LoginTime:   time.Now().Unix(),
 		ExpireTime:  time.Now().Unix() + 3600,
 	}
-	update, err := m.InsertOrUpdate(&md, "uid,client_id,uuid")
+	//update, err := m.InsertOrUpdate(&md, "uid,client_id,uuid")
+	// `sqlite3` nonsupport InsertOrUpdate in beego
+	// 此orm不支持sqlite3执行 InsertOrUpdate, 拆改两步完成
+	oldMd := models.Token{Uid: user.Id, ClientId: clientId, Uuid: uuid}
+	_ = m.Read(&oldMd, "uid", "client_id", "uuid")
+	rowId := int64(0)
+	var err error
+	// 存在主键更新
+	if oldMd.Id != 0 {
+		md.Id = oldMd.Id
+		rowId, err = m.Update(&md)
+		if err != nil {
+			return false
+		}
+	}
+	//不存在主键插入
+	rowId, err = m.Insert(&md)
 	if err != nil {
 		return false
 	}
-	if update > 0 {
-		log.Println("tokenUpdate", update)
+
+	if rowId > 0 {
+		log.Println("tokenUpdate", rowId)
 	}
 	return true
 }
