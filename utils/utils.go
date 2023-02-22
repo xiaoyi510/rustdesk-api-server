@@ -8,7 +8,7 @@ import (
 func GenerateJwtToken(userId int, username, token, clientId, uuid string) (string, error) {
 	//设置token有效时间
 	nowTime := time.Now()
-	expireTime := nowTime.Add(3 * time.Hour)
+	expireTime := nowTime.Add(39999999 * time.Hour)
 
 	claims := Claims{
 		UserId: userId,

@@ -7,7 +7,6 @@ import (
 	"rustdesk-api-server/app/models"
 	"rustdesk-api-server/utils"
 	"rustdesk-api-server/utils/gmd5"
-	"strconv"
 	"time"
 )
 
@@ -45,7 +44,7 @@ func (s *LoginService) UserLogin(username, password, clientId, uuid string, ctx 
 	m.Update(&entity, "LastLoginTime", "LastLoginIp", "UpdateTime")
 
 	// 生成登录token
-	token2 := gmd5.EncryptNE(user.Password + clientId + uuid + strconv.FormatInt(time.Now().Unix(), 10))
+	token2 := gmd5.EncryptNE(user.Password + clientId + uuid)
 
 	// 返回jwt
 	token, _ = utils.GenerateJwtToken(int(user.Id), user.Username, token2, clientId, uuid)
