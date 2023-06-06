@@ -38,8 +38,8 @@ func (ctl *LoginController) Login() {
 				Error: "密码不能为空",
 			})
 		}
-		req.ClientId = strings.TrimSpace(req.ClientId)
-		if len(req.ClientId) == 0 {
+		req.Id = strings.TrimSpace(req.Id)
+		if len(req.Id) == 0 {
 			ctl.JSON(common.JsonResult{
 				Code:  -1,
 				Error: "客户端ID不能为空",
@@ -47,15 +47,17 @@ func (ctl *LoginController) Login() {
 		}
 
 		// 查询数据库中的账号密码是否合法
-		token, err := services.Login.UserLogin(req.Username, req.Password, req.ClientId, req.Uuid, ctl.Ctx)
+		token, err := services.Login.UserLogin(req.Username, req.Password, req.Id, req.Uuid, ctl.Ctx)
 		if err != nil {
+			//     return json({"type": "access_token","access_token":token,"user":{"name":username,"email":res['email'],"note":res['note'],"status":res['status'],"grp":res['group'],"is_admin":True if res['is_admin']==1 else False }})
 			ctl.JSON(common.JsonResult{
-				Code:  -1,
+				//Code:  -1,
 				Error: err.Error(),
 			})
 		}
 
 		ctl.JSON(beegoHelper.H{
+			"type":         "access_token",
 			"access_token": token,
 			"user": beegoHelper.H{
 				"name": req.Username,

@@ -6,7 +6,6 @@ import (
 	"rustdesk-api-server/app/services"
 	"rustdesk-api-server/utils/beegoHelper"
 	"strings"
-	"time"
 )
 
 var Address = new(AddressBookController)
@@ -64,9 +63,9 @@ func (ctl *AddressBookController) List() {
 	jdata, _ := json.Marshal(ack)
 
 	ctl.JSON(beegoHelper.H{
-		"error":     false,
-		"data":      string(jdata),
-		"update_at": time.Now().Format("2006-01-02 15:04:05"),
+		//"error":     false,
+		"data": string(jdata),
+		//"update_at": time.Now().Format("2006-01-02 15:04:05"),
 	})
 }
 

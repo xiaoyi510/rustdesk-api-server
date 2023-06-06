@@ -2,13 +2,9 @@ package utils
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"time"
 )
 
 func GenerateJwtToken(userId int, username, token, clientId, uuid string) (string, error) {
-	//设置token有效时间
-	nowTime := time.Now()
-	expireTime := nowTime.Add(39999999 * time.Hour)
 
 	claims := Claims{
 		UserId: userId,
@@ -19,7 +15,7 @@ func GenerateJwtToken(userId int, username, token, clientId, uuid string) (strin
 		//Uuid:     uuid,
 		StandardClaims: jwt.StandardClaims{
 			// 过期时间
-			ExpiresAt: expireTime.Unix(),
+			ExpiresAt: 0,
 			// 指定token发行人
 			Issuer: "baozier",
 		},

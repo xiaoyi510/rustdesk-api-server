@@ -23,7 +23,7 @@ func (ctl *BaseController) Prepare() {
 	controllerName, actionName := ctl.GetControllerAndAction()
 	ctl.controllerName = strings.ToLower(controllerName[0 : len(controllerName)-10])
 	ctl.actionName = strings.ToLower(actionName)
-	log.Println("请求接口", ctl.controllerName, ctl.actionName)
+	log.Println("请求接口", ctl.Ctx.Input.URL(), ctl.Ctx.Input.Method(), string(ctl.Ctx.Input.RequestBody))
 	// 获取token
 	token := ctl.Ctx.Input.Header("Authorization")
 	if ctl.controllerName != "login" && ctl.controllerName != "index" && !(ctl.controllerName == "user" && (ctl.actionName == "reg" || ctl.actionName == "setpwd")) {
