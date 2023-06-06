@@ -24,6 +24,7 @@ func init() {
 
 	// 设定路由信息
 	beego.Router("/", &controllers.IndexController{}, "get:Index")
+	beego.Router("/api/heartbeat", &controllers.HeartController{}, "post:Heart")
 	beego.Router("/api/login", &controllers.LoginController{}, "post:Login")
 	beego.Router("/api/ab", &controllers.AddressBookController{}, "post:Update")
 	beego.Router("/api/ab/get", &controllers.AddressBookController{}, "post:List")
