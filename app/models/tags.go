@@ -9,6 +9,7 @@ type Tags struct {
 	Id  int32  `json:"id"`
 	Uid int32  `json:"uid"`
 	Tag string `json:"tag"`
+	Color string  `json:"color,omitempty"`
 }
 
 func (u *Tags) TableName() string {

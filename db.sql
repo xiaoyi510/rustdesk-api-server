@@ -40,6 +40,7 @@ CREATE TABLE `rustdesk_tags` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT 'tagID',
   `uid` int(10) unsigned NOT NULL COMMENT '用户ID',
   `tag` char(20) NOT NULL DEFAULT '' COMMENT 'tag名称',
+  `color` char(10) NULL COMMENT 'Tag Color',
   PRIMARY KEY (`id`),
   UNIQUE KEY `tag` (`tag`,`uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COMMENT='tags表';

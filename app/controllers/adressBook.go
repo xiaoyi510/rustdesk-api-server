@@ -6,6 +6,7 @@ import (
 	"rustdesk-api-server/app/services"
 	"rustdesk-api-server/utils/beegoHelper"
 	"strings"
+	"strconv"
 )
 
 var Address = new(AddressBookController)
@@ -19,11 +20,18 @@ func (ctl *AddressBookController) List() {
 	ack := dto.AbGetAck{}
 	ack.Tags = []string{}
 	// 查询 tags
+	tag_colors := dto.AbTag_colors{}
 	tags := services.Tags.FindTags(ctl.loginUserInfo.Id)
 	for _, item := range tags {
 		ack.Tags = append(ack.Tags, item.Tag)
+		
+		if (item.Color != ""){
+			tag_colors[item.Tag], _ = strconv.ParseInt(item.Color, 10, 64)
+		}
 	}
-
+	jdata_tag_colors, _ := json.Marshal(tag_colors)
+	ack.Tag_colors = string(jdata_tag_colors)
+	
 	// 查询 peers
 	ack.Peers = []dto.AbGetPeer{}
 	peerDbs := services.Peers.FindPeers(ctl.loginUserInfo.Id)
@@ -95,7 +103,7 @@ func (ctl *AddressBookController) Update() {
 	services.Peers.DeleteAll(ctl.loginUserInfo.Id)
 
 	// 开始批量插入tags
-	if !services.Tags.BatchAdd(ctl.loginUserInfo.Id, reqSub.Tags) {
+	if !services.Tags.BatchAdd(ctl.loginUserInfo.Id, reqSub.Tags, reqSub.Tag_colors) {
 		ctl.JSON(beegoHelper.H{
 			"error": "导入标签失败",
 		})

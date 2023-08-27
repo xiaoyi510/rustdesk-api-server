@@ -1,8 +1,11 @@
 package dto
 
+type AbTag_colors map[string]int64
+
 type AbGetAck struct {
 	Tags  []string    `json:"tags"`
 	Peers []AbGetPeer `json:"peers"`
+	Tag_colors string `json:"tag_colors,omitempty"`	
 }
 
 type AbGetPeer struct {
@@ -21,4 +24,5 @@ type AbUpdateReq struct {
 type AbUpdateSub struct {
 	Tags  []string    `json:"tags"`
 	Peers []AbGetPeer `json:"peers"`
+	Tag_colors string `json:"tag_colors,omitempty"`	
 }
