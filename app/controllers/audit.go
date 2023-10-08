@@ -13,6 +13,13 @@ type AuditController struct {
 	BaseController
 }
 
+// 操作反馈
+func (ctl *AuditController) AuditConn() {
+	//  {"action":"close","conn_id":129,"id":"1089363550","session_id":9166591467229392641,"uuid":"M0Y4MkI3N0MtMDMwMy01N0EwLTg5MzAtNDcwNUI4NUNFNUZD"}
+	//  {"action":"new","conn_id":129,"id":"1089363550","ip":"10.10.102.105","session_id":0,"uuid":"M0Y4MkI3N0MtMDMwMy01N0EwLTg5MzAtNDcwNUI4NUNFNUZD"}
+	//  {"conn_id":129,"id":"1089363550","peer":["1089363550","xxxx"],"session_id":9166591467229392641,"type":0,"uuid":"M0Y4MkI3N0MtMDMwMy01N0EwLTg5MzAtNDcwNUI4NUNFNUZD"}
+}
+
 // 心跳检测 POST
 func (ctl *AuditController) Audit() {
 	req := dto.AuditReq{}

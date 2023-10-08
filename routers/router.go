@@ -31,6 +31,7 @@ func init() {
 	beego.Router("/api/ab", &controllers.AddressBookController{}, "get:List")
 	beego.Router("/api/ab/get", &controllers.AddressBookController{}, "post:List")
 	beego.Router("/api/audit", &controllers.AuditController{}, "post:Audit")
+	beego.Router("/api/audit/conn", &controllers.AuditController{}, "post:AuditConn")
 	beego.Router("/api/logout", &controllers.LogoutController{}, "post:Logout")
 	beego.Router("/api/currentUser", &controllers.UserController{}, "post:CurrentUser")
 	beego.Router("/api/reg", &controllers.UserController{}, "get:Reg")
