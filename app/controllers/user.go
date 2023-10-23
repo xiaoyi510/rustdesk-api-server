@@ -91,3 +91,44 @@ func (ctl *UserController) SetPwd() {
 		})
 	}
 }
+
+// 分组
+func (ctl *UserController) Users() {
+	ctl.JSON(beegoHelper.H{
+		"msg":   "成功",
+		"total": 1,
+		"data": []beegoHelper.H{
+			{
+				"name":     "默认用户",
+				"email":    "ff",
+				"note":     "哈哈",
+				"status":   1,
+				"is_admin": true,
+			},
+		},
+	})
+}
+
+func (ctl *UserController) Peers() {
+	ctl.JSON(beegoHelper.H{
+		"msg":   "成功",
+		"total": 1,
+		"data": []beegoHelper.H{
+			{
+				"id": "test",
+				"info": beegoHelper.H{
+					"username": "",
+					"os":       "", // windows
+					//linux
+					//macos
+					//android
+					"device_name": "",
+				},
+				"user":      "ff",
+				"user_name": "占位",
+				"node":      "tt",
+				"is_admin":  true,
+			},
+		},
+	})
+}

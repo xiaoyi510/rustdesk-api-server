@@ -36,6 +36,8 @@ func init() {
 	beego.Router("/api/currentUser", &controllers.UserController{}, "post:CurrentUser")
 	beego.Router("/api/reg", &controllers.UserController{}, "get:Reg")
 	beego.Router("/api/set-pwd", &controllers.UserController{}, "get:SetPwd")
+	beego.Router("/api/users", &controllers.UserController{}, "get:Users")
+	beego.Router("/api/peers", &controllers.UserController{}, "get:Peers")
 
 	// 设置错误路由
 	beego.ErrorController(&controllers.ErrorController{})
