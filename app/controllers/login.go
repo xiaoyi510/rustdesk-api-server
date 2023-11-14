@@ -39,12 +39,12 @@ func (ctl *LoginController) Login() {
 			})
 		}
 		req.Id = strings.TrimSpace(req.Id)
-		if len(req.Id) == 0 {
-			ctl.JSON(common.JsonResult{
-				Code:  -1,
-				Error: "客户端ID不能为空",
-			})
-		}
+		// if len(req.Id) == 0 {
+		// 	ctl.JSON(common.JsonResult{
+		// 		Code:  -1,
+		// 		Error: "客户端ID不能为空",
+		// 	})
+		// }
 
 		// 查询数据库中的账号密码是否合法
 		token, err := services.Login.UserLogin(req.Username, req.Password, req.Id, req.Uuid, ctl.Ctx)
